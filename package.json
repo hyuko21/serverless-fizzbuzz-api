@@ -1,0 +1,12 @@
+{
+  "name": "serverless-fizzbuzz",
+  "version": "1.0.0",
+  "author": {
+    "email": "hyukodev@gmail.com",
+    "name": "Victor Ribeiro"
+  },
+  "engines": {
+    "node": ">=14.15.0"
+  },
+  "license": "MIT"
+}
