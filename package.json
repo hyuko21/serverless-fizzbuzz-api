@@ -14,7 +14,9 @@
   },
   "devDependencies": {
     "@serverless/typescript": "^2.23.0",
+    "@types/faker": "^5.5.9",
     "@types/jest": "^27.0.3",
+    "faker": "^5.5.3",
     "jest": "^27.4.3",
     "serverless": "^2.23.0",
     "ts-jest": "^27.0.7",
