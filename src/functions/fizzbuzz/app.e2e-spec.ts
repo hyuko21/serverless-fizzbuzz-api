@@ -18,6 +18,16 @@ describe('FizzBuzz E2E', () => {
       requestTest = agentTest.post(apiPath);
     });
 
+    describe('invalid request body', () => {
+      it('should return 400 if number is missing', async () => {
+        await requestTest.send({}).expect(400, { error: '"number" is required' });
+      });
+
+      it('should return 400 if number is invalid', async () => {
+        await requestTest.send({ number: NaN }).expect(400, { error: '"number" must be a number' });
+      });
+    });
+
     it('should return "fizzbuzz" if number is divisible by 3 and 5', async () => {
       await requestTest.send({ number: 15 }).expect(200, { result: 'fizzbuzz' });
     });
