@@ -5,8 +5,6 @@
       "ESNext"
     ],
     "moduleResolution": "node",
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
     "removeComments": true,
     "esModuleInterop": true,
     "sourceMap": true,

@@ -1,6 +1,5 @@
 import type { AWS } from '@serverless/typescript';
-
-import { fizzBuzz } from '@/functions';
+import { functions } from '@/functions';
 
 const serverlessConfiguration: AWS = {
   service: 'serverless-fizzbuzz',
@@ -22,7 +21,7 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: '20201221',
   },
-  functions: { fizzBuzz },
+  functions,
   package: { individually: true },
 };
 
