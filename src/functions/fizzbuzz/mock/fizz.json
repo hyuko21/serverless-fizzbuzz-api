@@ -1,0 +1,8 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "path": "/fizzbuzz",
+  "httpMethod": "POST",
+  "body": "{\"number\":6}"
+}
