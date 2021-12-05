@@ -1,8 +1,11 @@
 import type { AWS } from '@serverless/typescript';
 
+import { fizzBuzz } from '@/functions';
+
 const serverlessConfiguration: AWS = {
   service: 'serverless-fizzbuzz',
   frameworkVersion: '2',
+  plugins: ['serverless-offline'],
   provider: {
     name: 'aws',
     runtime: 'nodejs14.x',
@@ -19,6 +22,7 @@ const serverlessConfiguration: AWS = {
     },
     lambdaHashingVersion: '20201221',
   },
+  functions: { fizzBuzz },
   package: { individually: true },
 };
 
