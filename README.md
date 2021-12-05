@@ -55,6 +55,19 @@ curl --location --request POST 'https://xxxxxxxxxx.execute-api.us-east-1.amazona
 
 ## Project features
 
+### Cloud deployment structure
+
+The project was developed using many AWS core services, like:
+
+- `Lambda` - Functions to handle business logic
+- `API Gateway` - Service to handle HTTP connections and trigger lambda functions
+- `Cloudwatch` - Monitoring service for API Gateway and lambda usage (logs)
+- `X-Ray` - For debugging, it tracks requests end-to-end and represent it in a visual and dynamic way
+
+And it's organized in the following way:
+
+![AWS Cloud deployment](aws_cloud_deployment.jpg)
+
 ### Project structure
 
 The project code base is mainly located within the `src` folder. This folder is divided in:
