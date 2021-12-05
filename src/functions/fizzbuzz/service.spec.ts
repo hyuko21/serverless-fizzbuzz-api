@@ -1,4 +1,5 @@
 import faker from 'faker'
+import { ok } from '@/libs/helpers'
 import { isFizz, isBuzz } from './helpers'
 import { FizzBuzzService } from './service'
 
@@ -23,51 +24,51 @@ describe('FizzBuzz Service', () => {
   describe('exec()', () => {
     it('should call isFizz() with correct params', async () => {
       const request = mockRequest();
-      sut.exec(request);
+      await sut.exec(request);
       expect(isFizz).toHaveBeenCalledWith(request.number);
     });
 
     it('should call isBuzz() with correct params if isFizz() returns true', async () => {
       const request = mockRequest();
       (isFizz as jest.Mock).mockReturnValueOnce(true);
-      sut.exec(request);
+      await sut.exec(request);
       expect(isBuzz).toHaveBeenCalledWith(request.number);
     });
 
     it('should return "fizzbuzz" if both isFizz() and isBuzz() return true', async () => {
       (isFizz as jest.Mock).mockReturnValueOnce(true);
       (isBuzz as jest.Mock).mockReturnValueOnce(true);
-      const response = sut.exec(mockRequest());
-      expect(response).toEqual({ result: 'fizzbuzz' });
+      const response = await sut.exec(mockRequest());
+      expect(response).toEqual(ok({ result: 'fizzbuzz' }));
     });
 
     it('should return "fizz" if isFizz() returns true and isBuzz() returns false', async () => {
       (isFizz as jest.Mock).mockReturnValueOnce(true);
       (isBuzz as jest.Mock).mockReturnValueOnce(false);
-      const response = sut.exec(mockRequest());
-      expect(response).toEqual({ result: 'fizz' });
+      const response = await sut.exec(mockRequest());
+      expect(response).toEqual(ok({ result: 'fizz' }));
     });
 
     it('should call isBuzz() with correct params if isFizz() returns false', async () => {
       const request = mockRequest();
       (isFizz as jest.Mock).mockReturnValueOnce(false)
-      sut.exec(request);
+      await sut.exec(request);
       expect(isBuzz).toHaveBeenCalledWith(request.number);
     });
 
     it('should return "buzz" if isBuzz() returns true and isFizz() returns false', async () => {
       (isFizz as jest.Mock).mockReturnValueOnce(false);
       (isBuzz as jest.Mock).mockReturnValueOnce(true);
-      const response = sut.exec(mockRequest());
-      expect(response).toEqual({ result: 'buzz' });
+      const response = await sut.exec(mockRequest());
+      expect(response).toEqual(ok({ result: 'buzz' }));
     });
 
     it('should return the number from request if both isFizz() and isBuzz() return false', async () => {
       const request = mockRequest();
       (isFizz as jest.Mock).mockReturnValueOnce(false);
       (isBuzz as jest.Mock).mockReturnValueOnce(false);
-      const response = sut.exec(request);
-      expect(response).toEqual({ result: request.number });
+      const response = await sut.exec(request);
+      expect(response).toEqual(ok({ result: request.number }));
     });
   });
 });

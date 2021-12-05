@@ -1,7 +1,9 @@
-import { isBuzz, isFizz } from "./helpers"
+import { ok } from '@/libs/helpers';
+import { HttpResponse, IService } from '@/libs/protocols';
+import { isBuzz, isFizz } from './helpers'
 
-export class FizzBuzzService {
-  exec(request: FizzBuzzService.Request): FizzBuzzService.Response {
+export class FizzBuzzService implements IService {
+  async exec(request: FizzBuzzService.Request): Promise<HttpResponse> {
     const response: FizzBuzzService.Response = { result: request.number };
     if (isFizz(request.number)) {
       response.result = 'fizz'
@@ -9,9 +11,9 @@ export class FizzBuzzService {
         response.result = 'fizzbuzz';
       }
     } else if (isBuzz(request.number)) {
-      response.result = 'buzz'
+      response.result = 'buzz';
     }
-    return response
+    return ok(response);
   }
 }
 
