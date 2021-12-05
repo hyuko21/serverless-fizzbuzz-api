@@ -10,11 +10,41 @@ const serverlessConfiguration: AWS = {
     runtime: 'nodejs14.x',
     stage: "${opt:stage, 'dev'}",
     versionFunctions: false,
+    tracing: {
+      apiGateway: true,
+      lambda: true,
+    },
+    iamRoleStatements: [
+      {
+        Effect: 'Allow',
+        Action: [
+          'xray:PutTraceSegments',
+          'xray:PutTelemetryRecords'
+        ],
+        Resource: '*',
+      },
+    ],
+    logRetentionInDays: 7,
+    logs: {
+      frameworkLambda: true,
+      restApi: true,
+    },
     apiName: '${self:provider.stage}-${self:service}',
     apiGateway: {
       minimumCompressionSize: 1024,
       shouldStartNameWithService: true,
       apiKeys: ['${self:provider.apiName}'],
+      usagePlan: {
+        quota: {
+          limit: 144000,
+          offset: 0,
+          period: 'DAY',
+        },
+        throttle: {
+          burstLimit: 1000,
+          rateLimit: 1000,
+        },
+      }
     },
     environment: {
       AWS_NODEJS_CONNECTION_REUSE_ENABLED: '1',
